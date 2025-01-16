@@ -1,0 +1,11 @@
+terraform.tfstate
+terrafomr.tfstate.backup
+apic/terraform.tfstate
+apic/terraform.tfstate.backup
+apic/.terraform.lock.hcl
+fmc/terraform.tfstate
+fmc/terraform.tfstate.backup
+fmc/.terraform.lock.hcl
+.DS_Store
+apic/.terraform
+fmc/.terraform

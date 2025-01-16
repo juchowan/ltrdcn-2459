@@ -1,0 +1,4 @@
+fmc:
+  domains:
+    - name: Global
+      objects:

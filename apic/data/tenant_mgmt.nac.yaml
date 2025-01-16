@@ -1,0 +1,34 @@
+---
+apic:
+  tenants:
+    - name: mgmt
+
+      oob_endpoint_groups:
+        - name: oob
+          oob_contracts:
+            providers:
+              - permit-to-oob
+
+      ext_mgmt_instances:
+        - name: ext
+          subnets:
+            - 0.0.0.0/0
+          oob_contracts:
+            consumers:
+              - permit-to-oob
+
+      filters:
+        - name: tcp-src-any-to-dst-443
+          entries:
+            - name: src-any-to-dst-443
+              ethertype: ip
+              protocol: tcp
+              destination_from_port: https
+              destination_to_port: https
+
+      oob_contracts:
+        - name: permit-to-oob
+          subjects:
+            - name: tcp-entries
+              filters:
+                - filter: tcp-src-any-to-dst-443

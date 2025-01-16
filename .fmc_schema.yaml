@@ -1,0 +1,42 @@
+---
+fmc: include("fmc", required=False)
+---
+fmc:
+  domains: list(include("domains"), required=False)
+  name: str(required=False)
+  system: include("system", required=False)
+
+system:
+  policy_assignment: include("system_policy_assignment",required=False)
+  deployment: include("system_deployment",required=False)
+
+system_policy_assignment:
+  after_destroy_policy: str(required=False)
+
+system_deployment:
+  ignore_warning: bool(required=False)
+  deployment_note: str(required=False)
+
+domains:
+  name: str(required=True)
+  objects: include("domains_objects", required=False)
+
+domains_objects:
+  hosts: list(include("domains_objects_hosts"), required=False)
+  networks: list(include("domains_objects_networks"), required=False)
+  security_zones: list(include("domains_objects_security_zones"), required=False)
+
+domains_objects_hosts:
+  name: regex('^[a-zA-Z0-9_.+-]{1,64}$', required=True)
+  ip: ip(required=True)
+  description: str(max=255, required=False)
+
+domains_objects_networks:
+  name: regex('^[a-zA-Z0-9_.+-]{1,64}$', required=True)
+  prefix: ip(required=True)
+  description: str(max=255, required=False)
+
+domains_objects_security_zones:
+  name: regex('^[a-zA-Z0-9_.+-]{1,64}$', required=True)
+  interface_type: enum("ROUTED", "NONE", "INLINE", required=False)
+  description: str(max=255, required=False)

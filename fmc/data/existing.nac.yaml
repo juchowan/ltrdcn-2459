@@ -1,0 +1,26 @@
+existing:
+  fmc:
+    domains:
+      - name: Global
+
+        policies:
+        
+          intrusion_policies:
+            - name: Balanced Security and Connectivity
+
+          access_policies:
+              - name: ACI_ACP
+
+        objects:
+
+          networks:
+            - name: any-ipv4
+
+          ports:
+            - name: HTTPS
+            - name: DNS_over_UDP
+
+        devices:
+
+          devices:
+            - name: vFTD

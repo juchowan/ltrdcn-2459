@@ -1,0 +1,84 @@
+---
+apic:
+  auto_generate_switch_pod_profiles: true
+  access_policies:
+  
+    vlan_pools:
+      - name: all-vlans
+        allocation: dynamic
+        ranges:
+          - from: 100
+            to: 300
+            allocation: static
+
+    physical_domains:
+      - name: all-physical-devices
+        vlan_pool: all-vlans
+
+    aaeps:
+      - name: allow-all-vlans
+        physical_domains:
+          - all-physical-devices
+
+    interface_policies:
+      cdp_policies:
+        - name: nac-cdp-enabled
+          admin_state: true
+        - name: nac-cdp-disabled
+          admin_state: false
+      lldp_policies:
+        - name: nac-lldp-enabled
+          admin_rx_state: true
+          admin_tx_state: true
+        - name: nac-lldp-disabled
+          admin_rx_state: false
+          admin_tx_state: false
+      link_level_policies:
+        - name: nac-link-level-1G-auto
+          speed: 1G
+          auto: true
+          fec_mode: inherit
+        - name: nac-link-level-10G-auto
+          speed: 10G
+          auto: true
+          fec_mode: inherit
+      port_channel_policies:
+        - name: nac-lacp-active
+          mode: active
+        - name: nac-mac-pinning
+          mode: mac-pin
+
+    leaf_interface_policy_groups:
+      - name: core-routers
+        type: access
+        link_level_policy: nac-link-level-1G-auto
+        cdp_policy: nac-cdp-enabled
+        aaep: allow-all-vlans
+
+      - name: fmc
+        type: access
+        link_level_policy: nac-link-level-10G-auto
+        cdp_policy: nac-cdp-enabled
+        aaep: allow-all-vlans
+
+      - name: linux-servers
+        type: access
+        link_level_policy: nac-link-level-10G-auto
+        cdp_policy: nac-cdp-enabled
+        aaep: allow-all-vlans
+
+      - name: hx-prod-fi-a
+        type: pc
+        link_level_policy: nac-link-level-10G-auto
+        cdp_policy: nac-cdp-enabled
+        lldp_policy: nac-lldp-enabled
+        port_channel_policy: nac-lacp-active
+        aaep: allow-all-vlans
+
+      - name: hx-prod-fi-b
+        type: pc
+        link_level_policy: nac-link-level-10G-auto
+        cdp_policy: nac-cdp-enabled
+        lldp_policy: nac-lldp-enabled
+        port_channel_policy: nac-lacp-active
+        aaep: allow-all-vlans

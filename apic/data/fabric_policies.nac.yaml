@@ -1,0 +1,8 @@
+---
+apic:
+  fabric_policies:
+    fabric_bgp_as: 65010
+
+    fabric_bgp_rr:
+      - 2201
+      - 2202
