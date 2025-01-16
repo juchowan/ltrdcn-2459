@@ -1,0 +1,26 @@
+fmc:
+  domains:
+    - name: Global
+      devices:
+        devices:
+          - name: vFTD
+            access_policy_name: Demo_ACP
+            deploy: true
+            vrfs:
+              - name: Global
+                physical_interfaces:
+                  - name: GigabitEthernet0/0
+                    logical_name: aci
+                    security_zone: aci
+                    mode: NONE
+                    ipv4_static_address: 10.100.1.2
+                    ipv4_static_netmask: 28
+                    enabled: true
+                ipv4_static_routes:
+                  - name: MyDefaultRoute1
+                    gateway:
+                      object: Gateway
+                    interface_logical_name: aci
+                    metric: 1
+                    selected_networks:
+                      - any-ipv4
