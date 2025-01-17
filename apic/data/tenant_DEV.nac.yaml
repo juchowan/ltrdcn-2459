@@ -1,0 +1,90 @@
+---
+apic:
+  tenants:
+    - name: DEV 
+
+      vrfs:
+        - name: DEV-VRF
+          contracts:
+            consumers:
+              - VZANY
+            providers:
+              - VZANY
+
+      bridge_domains:
+        - name: 10.1.200.0_24
+          vrf: DEV-VRF
+          subnets:
+            - ip: 10.1.200.1/24
+
+        - name: 10.1.201.0_24
+          vrf: DEV-VRF
+          subnets:
+            - ip: 10.1.201.1/24
+
+        - name: SERVICE_BD
+          vrf: DEV-VRF
+          subnets:
+            - ip: 10.100.1.1/28
+
+      application_profiles:
+        - name: VLANS
+          endpoint_groups:
+            - name: VLAN200
+              bridge_domain: 10.1.200.0_24
+
+            - name: VLAN201
+              bridge_domain: 10.1.201.0_24
+
+      contracts:
+        - name: VZANY
+          subjects:
+            - name: PERMIT_ANY
+              service_graph: SG1
+              filters:
+                - filter: default
+
+      services:
+        l4l7_devices:
+          - name: DEV1
+            physical_domain: all-physical-devices
+            concrete_devices:
+              - name: DEV1
+                interfaces:
+                  - name: INT1
+                    node_id: 1101
+                    port: 1
+            logical_interfaces:
+              - name: ONE_ARM
+                vlan: 123
+                concrete_interfaces:
+                  - device: DEV1
+                    interface_name: INT1
+        
+        service_graph_templates:
+          - name: SG1
+            redirect: true
+            device:
+              name: DEV1
+        
+        device_selection_policies:
+          - contract: VZANY
+            service_graph_template: SG1
+            consumer:
+              redirect_policy:
+                name: PBR1
+              logical_interface: ONE_ARM
+              bridge_domain:
+                name: SERVICE_BD
+            provider:
+              redirect_policy:
+                name: PBR1
+              logical_interface: ONE_ARM
+              bridge_domain:
+                name: SERVICE_BD
+        
+        redirect_policies:
+          - name: PBR1
+            l3_destinations:
+              - ip: 10.100.1.2
+                mac: 00:00:00:11:22:33
