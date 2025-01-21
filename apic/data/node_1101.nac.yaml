@@ -1,0 +1,16 @@
+---
+apic:
+  interface_policies:
+    nodes:
+      - id: 1101
+        interfaces:
+          - port: 1
+            policy_group: fmc
+          - port: 2
+            policy_group: linux-servers
+          - port: 3
+            policy_group: hx-prod-fi-a
+          - port: 4
+            policy_group: hx-prod-fi-a
+          - port: 5
+            policy_group: core-routers
