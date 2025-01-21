@@ -9,5 +9,11 @@ terraform {
 
 module "fmc" {
   source            = "git::https://github.com/mmaciejc/terraform-fmc-nac-fmc"
-  manage_deployment = true
+  manage_deployment = var.manage_deployment
+}
+
+provider "fmc" {
+    username = "apiadmin"
+    password = "C1sco12345"
+    url = "https://198.18.130.200"
 }
