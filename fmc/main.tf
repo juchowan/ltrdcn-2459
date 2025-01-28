@@ -12,8 +12,8 @@ module "fmc" {
   manage_deployment = var.manage_deployment
 }
 
-provider "fmc" {
-    username = "apiadmin"
-    password = "C1sco12345"
-    url = "https://198.18.130.200"
-}
+#provider "fmc" {
+#    username  = "apiadmin"
+#    password  = "C1sco12345"
+#    url       = "https://198.18.130.200"
+#}

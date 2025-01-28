@@ -2,6 +2,8 @@ fmc:
   system:
     policy_assignment: 
       after_destroy_policy_name: ACI_ACP
+    deploy:
+      ignore_warning: true
   domains:
     - name: Global
       devices:
