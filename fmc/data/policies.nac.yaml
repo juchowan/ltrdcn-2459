@@ -22,7 +22,7 @@ fmc:
                     - ACI_BD2
                     destination_port_objects:
                     - HTTPS
-                    ips_policy: "Balanced Security and Connectivity"
+                    intrusion_policy: "Balanced Security and Connectivity"
                     log_connection_begin: true
                     log_connection_end: true
                     log_files: false
@@ -40,7 +40,7 @@ fmc:
                     - ACI_BD3
                     destination_port_objects:
                     - DNS_over_UDP
-                    ips_policy: "Balanced Security and Connectivity"
+                    intrusion_policy: "Balanced Security and Connectivity"
                     log_connection_begin: true
                     log_connection_end: true
                     log_files: false
