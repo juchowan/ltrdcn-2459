@@ -2,7 +2,7 @@
 Documentation    Verify hosts
 Suite Setup      Login FMC
 Default Tags     fmc    day1    config    hosts
-Resource    ../../fmc_common.resource
+Resource    ./fmc_common.resource
 
 *** Test Cases ***
 {% for domain in fmc.domains | default([]) %}
