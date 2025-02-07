@@ -53,16 +53,19 @@ apic:
         type: access
         link_level_policy: nac-link-level-1G-auto
         cdp_policy: nac-cdp-enabled
+        aaep: allow-all-vlans
 
       - name: fmc
         type: access
         link_level_policy: nac-link-level-10G-auto
         cdp_policy: nac-cdp-enabled
+        aaep: allow-all-vlans
 
       - name: linux-servers
         type: access
         link_level_policy: nac-link-level-10G-auto
         cdp_policy: nac-cdp-enabled
+        aaep: allow-all-vlans
 
       - name: hx-prod-fi-a
         type: pc
@@ -70,6 +73,7 @@ apic:
         cdp_policy: nac-cdp-enabled
         lldp_policy: nac-lldp-enabled
         port_channel_policy: nac-lacp-active
+        aaep: allow-all-vlans
 
       - name: hx-prod-fi-b
         type: pc
@@ -77,3 +81,4 @@ apic:
         cdp_policy: nac-cdp-enabled
         lldp_policy: nac-lldp-enabled
         port_channel_policy: nac-lacp-active
+        aaep: allow-all-vlans
