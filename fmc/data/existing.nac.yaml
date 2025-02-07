@@ -3,7 +3,7 @@ existing:
     domains:
       - name: Global
         policies:
-          intrusion_policies:
+          ips_policies:
             - name: Balanced Security and Connectivity
           access_policies:
               - name: ACI_ACP
