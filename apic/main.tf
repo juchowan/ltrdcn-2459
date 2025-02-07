@@ -6,6 +6,8 @@ terraform {
   }
 }
 
+provider "aci" {
+}
 
 module "aci" {
   source  = "netascode/nac-aci/aci"
