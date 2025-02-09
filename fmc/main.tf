@@ -8,7 +8,8 @@ terraform {
 }
 
 module "fmc" {
-  source            = "git::https://github.com/netascode/terraform-fmc-nac-fmc?ref=dev"
+  source = "netascode/nac-fmc/fmc"
+  version = "0.0.1"
   manage_deployment = var.manage_deployment
 }
 
