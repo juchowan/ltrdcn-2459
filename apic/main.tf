@@ -22,5 +22,5 @@ module "aci" {
   manage_interface_policies = true
   manage_tenants            = true
 
-  write_default_values_file = "defaults.yaml" 
+  write_default_values_file = "defaults.yaml"
 }
