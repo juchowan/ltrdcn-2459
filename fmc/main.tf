@@ -9,10 +9,11 @@ terraform {
 
 provider "fmc" {
 }
+
 module "fmc" {
-  source            = "netascode/nac-fmc/fmc"
-  version           = "0.0.2"
-  
+  source  = "netascode/nac-fmc/fmc"
+  version = "0.0.2"
+
   yaml_directories = ["data"]
 
   manage_deployment = var.manage_deployment
