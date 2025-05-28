@@ -7,6 +7,8 @@ terraform {
   }
 }
 
+provider "fmc" {
+}
 module "fmc" {
   source            = "netascode/nac-fmc/fmc"
   version           = "0.0.2"
@@ -14,7 +16,6 @@ module "fmc" {
   yaml_directories = ["data"]
 
   manage_deployment = var.manage_deployment
-}
 
-provider "fmc" {
+  write_default_values_file = "defaults.yaml"
 }
