@@ -14,6 +14,7 @@ Verify Tenant {{ tenant.name }} Critical Faults
     ...   Fail  "{{ tenant.name }} has ${critical}[0] critical faults"
 
 Verify Tenant {{ tenant.name }} Minor Faults
+    Sleep   120s
     ${r}=   GET On Session   apic   /api/mo/uni/tn-{{ tenant.name }}/fltCnts.json
     ${minor}=   Get Value From Json   ${r.json()}   $..faultCountsWithDetails.attributes.minor
     Run Keyword If   ${minor}[0] > 0   Run Keyword And Continue On Failure
