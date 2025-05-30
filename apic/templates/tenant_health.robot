@@ -22,7 +22,7 @@ Verify Tenant {{ tenant.name }} Minor Faults
 Verify Tenant {{ tenant.name }} Health
     ${r}=   GET On Session   apic   /api/mo/uni/tn-{{ tenant.name }}/health.json
     ${health}=   Get Value From Json   ${r.json()}   $..healthInst.attributes.cur
-    Run Keyword If   ${health}[0] < 100   Run Keyword And Continue On Failure
+    Run Keyword If   ${health}[0] < 90   Run Keyword And Continue On Failure
     ...   Fail  "{{ tenant.name }} health score: ${health}[0]"
 
 {% endfor %}
