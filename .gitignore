@@ -1,5 +1,5 @@
 terraform.tfstate
-terrafomr.tfstate.backup
+terraform.tfstate.backup
 apic/terraform.tfstate
 apic/terraform.tfstate.backup
 apic/.terraform.lock.hcl
