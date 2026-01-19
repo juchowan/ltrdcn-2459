@@ -10,7 +10,12 @@ Library    Process
 *** Keywords ***
 Get FMC Token
     ${auth}=    Create List    %{FMC_USERNAME}    %{FMC_PASSWORD}
-    ${verify}=    Set Variable If    "%{FMC_INSECURE_SKIP_VERIFY}" == "False"    True    False
+    ${is_verify_set}=      Run Keyword And Return Status    Environment Variable Should Be Set    FMC_INSECURE
+    IF     ${is_verify_set}
+        ${verify}=    Set Variable If    "%{FMC_INSECURE}" == "False"    True    False
+    ELSE
+        ${verify}=    Set Variable     False
+    END
     ${log_level}=   Set Log Level   NONE
     Create Session    fmc_login    %{FMC_URL}   auth=${auth}  verify=${verify}    disable_warnings=1
     Set Log Level   ${log_level}
@@ -29,7 +34,7 @@ Login FMC
     Run Only Once    Get FMC Token
     ${fmc_token}=    Get Parallel Value For Key    fmc_token
     ${fmc_domain_map}=    Get Parallel Value For Key    fmc_domain_map 
-    Create Session    fmc    %{FMC_URL}    headers={"content-type": "application/json", "X-auth-access-token":"${fmc_token}"}    disable_warnings=1
+    Create Session    fmc    %{FMC_URL}    headers={"content-type": "application/json", "X-auth-access-token":"${fmc_token}"}    disable_warnings=1    backoff_factor=1    retry_status_list=[429]
     Set Global Variable    ${FMC_DOMAIN_MAP}    ${fmc_domain_map}
 
 Should Be Equal Value Json String
@@ -39,7 +44,7 @@ Should Be Equal Value Json String
 
 Get All Objects By Name
     [Arguments]    ${url}     ${key}=${None}
-    ${r}=    GET On Session    fmc    url=${url}expanded=true&limit=10000
+    ${r}=    GET On Session    fmc    url=${url}expanded=true&limit=1000
     IF     'items' not in @{r.json()}
         @{objects}      Create List
     ELSE
@@ -62,4 +67,4 @@ Get All Objects By Name
         END
     END
 
-    [Return]    ${objects_by_name}
+    RETURN    ${objects_by_name}

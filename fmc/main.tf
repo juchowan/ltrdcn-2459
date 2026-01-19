@@ -2,7 +2,7 @@ terraform {
   required_providers {
     fmc = {
       source  = "CiscoDevNet/fmc"
-      version = "2.0.0-beta2"
+      version = "2.0.0-rc8"
     }
   }
 }
@@ -12,7 +12,7 @@ provider "fmc" {
 
 module "fmc" {
   source  = "netascode/nac-fmc/fmc"
-  version = "0.0.2"
+  version = "0.1.0"
 
   yaml_directories = ["data"]
 

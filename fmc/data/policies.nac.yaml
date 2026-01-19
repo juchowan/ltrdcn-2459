@@ -1,5 +1,3 @@
 fmc:
   domains:
     - name: Global
-      policies:
-

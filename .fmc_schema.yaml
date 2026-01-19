@@ -11,14 +11,14 @@ system:
   deployment: include("system_deployment",required=False)
 
 system_policy_assignment:
-  after_destroy_policy: str(required=False)
+  after_destroy_access_control_policy: str(required=False)
 
 system_deployment:
   ignore_warning: bool(required=False)
   deployment_note: str(required=False)
 
 domains:
-  name: str(required=True)
+  name: str()
   objects: include("domains_objects", required=False)
 
 domains_objects:
@@ -27,16 +27,17 @@ domains_objects:
   security_zones: list(include("domains_objects_security_zones"), required=False)
 
 domains_objects_hosts:
-  name: regex('^[a-zA-Z0-9_.+-]{1,64}$', required=True)
-  ip: ip(required=True)
+  name: regex('^[a-zA-Z0-9_.+-]{1,64}$')
+  ip: ip()
   description: str(max=255, required=False)
+  overridable: bool(required=False)
 
 domains_objects_networks:
-  name: regex('^[a-zA-Z0-9_.+-]{1,64}$', required=True)
-  prefix: ip(required=True)
+  name: regex('^[a-zA-Z0-9_.+-]{1,64}$')
+  prefix: ip()
   description: str(max=255, required=False)
+  overridable: bool(required=False)
 
 domains_objects_security_zones:
-  name: regex('^[a-zA-Z0-9_.+-]{1,64}$', required=True)
-  interface_type: enum("ROUTED", "NONE", "INLINE", required=False)
-  description: str(max=255, required=False)
+  name: regex('^[a-zA-Z0-9_.+-]{1,64}$')
+  interface_type: enum("ROUTED", "ASA", "INLINE", "SWITCHED", "PASSIVE", required=False)

@@ -4,11 +4,11 @@ existing:
       - name: Global
 
         policies:
-        
+
           intrusion_policies:
             - name: Balanced Security and Connectivity
 
-          access_policies:
+          access_control_policies:
               - name: ACI_ACP
 
         objects:
